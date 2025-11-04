@@ -1,13 +1,13 @@
 # Diffusion-of-Innovation-in-Organizational-Networks
-Data sets, simulation outputs, and scripts used to generate figures for the study of innovation diffusion in organizational networks under the biased-independence q-voter model
+Simulation results and scripts used to generate figures for the study of innovation diffusion in organizational networks under the biased-independence q-voter model
 
 # Data and Simulation Files for the Biased-Independence q-Voter Model
 
-This repository contains data sets, simulation results, and scripts related to the study:
+This repository contains simulation results (averaged trajectories), and scripts related to the study:
 
 > *Pair Approximation Meets Reality: Diffusion of Innovation in Organizational Networks within the biased-independence q-Voter Model.*
 
-The materials include organization data sets, numerical results, generated figures, and the code used for data analysis.  
+The materials include Monte Carlo simulations results, the scripts used for data analysis, and generated figures.
 They are provided to support reproducibility and further research on diffusion processes and social influence in organizational networks.
 
 ## Usage
