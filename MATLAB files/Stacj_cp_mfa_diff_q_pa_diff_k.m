@@ -1,4 +1,4 @@
-% PARAMETRY OGÓLNE
+% PARAMETRY OGÃ“LNE
 colors = [224, 159, 62;
           158, 42, 43;
           21, 109, 160;
@@ -24,7 +24,7 @@ left_margins = [0.055, 0.38, 0.705];
 width = 0.26;
 height = 1;
 
-% PANEL 1 i 2: MFA dla ró¿nych q i p_eng
+% PANEL 1 i 2: MFA dla rÃ³Â¿nych q i p_eng
 for j = 1:2
     ax = axes('Position', [left_margins(j), 0.055, width, height]);
     hold(ax, 'on');
@@ -38,28 +38,28 @@ for j = 1:2
         q = q_list(qi);
 
         if p_eng < 0.5
-            % MFA (p_eng < 0.5) - zgodnie z Twoim orygina³em
+            % MFA (p_eng < 0.5) - zgodnie z Twoim oryginaÂ³em
             c_mfa_down = 0.0001:0.0001:0.4999;
             num = (c_mfa_down .* (1 - c_mfa_down).^q - (1 - c_mfa_down) .* c_mfa_down.^q);
             den = (c_mfa_down .* (1 - c_mfa_down).^q - (1 - c_mfa_down) .* c_mfa_down.^q + p_eng - c_mfa_down);
             p_st_mfa_down = num ./ den;
 
-            % usuñ NaN i wartoœci spoza [0, 1]
+            % usuÃ± NaN i wartoÅ“ci spoza [0, 1]
             valid = isfinite(p_st_mfa_down) & (p_st_mfa_down >= 0) & (p_st_mfa_down <= 1);
             p_st_mfa_down = p_st_mfa_down(valid);
             c_mfa_down = c_mfa_down(valid);
 
-            % znajdŸ lokalne maksima i minima
+            % znajdÅ¸ lokalne maksima i minima
             [pks_max, locs_max] = findpeaks(p_st_mfa_down);
             [pks_min, locs_min] = findpeaks(-p_st_mfa_down);
             pks_min = -pks_min;
 
-            % górna ga³¹Ÿ (rysowana zawsze)
+            % gÃ³rna gaÂ³Â¹Å¸ (rysowana zawsze)
             c_mfa_up = 0.5:0.0001:0.9999;
             p_st_mfa_up = (c_mfa_up .* (1 - c_mfa_up).^q - (1 - c_mfa_up) .* c_mfa_up.^q) ...
                            ./ (c_mfa_up .* (1 - c_mfa_up).^q - (1 - c_mfa_up) .* c_mfa_up.^q + p_eng - c_mfa_up);
 
-            % stabilna / niestabilna czêœæ górna
+            % stabilna / niestabilna czÃªÅ“Ã¦ gÃ³rna
             p_max_mfa_up = max(p_st_mfa_up);
             p_max_mfa_up_idx = find(p_st_mfa_up == p_max_mfa_up, 1);
             c_mfa_stable_up = c_mfa_up(p_max_mfa_up_idx:end);
@@ -67,13 +67,13 @@ for j = 1:2
             c_mfa_unstable_up = c_mfa_up(1:p_max_mfa_up_idx);
             p_st_mfa_unstable_up = p_st_mfa_up(1:p_max_mfa_up_idx);
 
-            % rysowanie górnej ga³êzi
+            % rysowanie gÃ³rnej gaÂ³Ãªzi
             plot(ax, p_st_mfa_unstable_up, c_mfa_unstable_up, '--', 'Color', colors(qi,:), 'LineWidth', 2);
             LH(qi) = plot(ax, p_st_mfa_stable_up, c_mfa_stable_up, '-', 'Color', colors(qi,:), 'LineWidth', 2);
 
-            % dolna ga³¹Ÿ: warunek histerezy
+            % dolna gaÂ³Â¹Å¸: warunek histerezy
             if isempty(pks_max) || isempty(pks_min)
-                % brak histerezy - rysujemy ca³oœæ ci¹g³¹ lini¹
+                % brak histerezy - rysujemy caÂ³oÅ“Ã¦ ciÂ¹gÂ³Â¹ liniÂ¹
                 plot(ax, p_st_mfa_down, c_mfa_down, '-', 'Color', colors(qi,:), 'LineWidth', 2);
             else
                 % histereza - wydzielamy stabilne i niestabilne fragmenty
@@ -85,7 +85,7 @@ for j = 1:2
                 i1 = find(c_mfa_down >= min(c_min, c_max), 1, 'first');
                 i2 = find(c_mfa_down <= max(c_min, c_max), 1, 'last');
 
-                % podzia³ na fragmenty
+                % podziaÂ³ na fragmenty
                 c_mfa_stable_down_up = c_mfa_down(i2:end);
                 p_st_mfa_stable_down_up = p_st_mfa_down(i2:end);
 
@@ -95,7 +95,7 @@ for j = 1:2
                 c_mfa_unstable_down = c_mfa_down(i1:i2);
                 p_st_mfa_unstable_down = p_st_mfa_down(i1:i2);
 
-                % rysowanie dolnej czêœci
+                % rysowanie dolnej czÃªÅ“ci
                 plot(ax, p_st_mfa_unstable_down, c_mfa_unstable_down, '--', 'Color', colors(qi,:), 'LineWidth', 2);
                 plot(ax, p_st_mfa_stable_down_up, c_mfa_stable_down_up, '-', 'Color', colors(qi,:), 'LineWidth', 2);
                 plot(ax, p_st_mfa_stable_down_down, c_mfa_stable_down_down, '-', 'Color', colors(qi,:), 'LineWidth', 2);
@@ -116,7 +116,7 @@ for j = 1:2
             [pks_min, locs_min] = findpeaks(-p_st_mfa_up);
             pks_min = -pks_min;
 
-            % dolna ga³¹Ÿ
+            % dolna gaÂ³Â¹Å¸
             c_mfa_down = 0.0001:0.0001:0.5;
             p_st_mfa_down = (c_mfa_down .* (1 - c_mfa_down).^q - (1 - c_mfa_down) .* c_mfa_down.^q) ...
                 ./ (c_mfa_down .* (1 - c_mfa_down).^q - (1 - c_mfa_down) .* c_mfa_down.^q + p_eng - c_mfa_down);
@@ -131,7 +131,7 @@ for j = 1:2
             plot(ax, p_st_mfa_unstable_down, c_mfa_unstable_down, '--', 'Color', colors(qi,:), 'LineWidth', 2);
             LH(qi) = plot(ax, p_st_mfa_stable_down, c_mfa_stable_down, '-', 'Color', colors(qi,:), 'LineWidth', 2);
 
-            % górna ga³¹Ÿ histerezy
+            % gÃ³rna gaÂ³Â¹Å¸ histerezy
             if isempty(pks_max) || isempty(pks_min)
                 plot(ax, p_st_mfa_up, c_mfa_up, '-', 'Color', colors(qi,:), 'LineWidth', 2);
             else
@@ -164,22 +164,22 @@ for j = 1:2
             c_mfa = c_mfa(valid);
             p_st_mfa = p_st_mfa(valid);
 
-            % szukamy ekstremów
+            % szukamy ekstremÃ³w
             dpdc = gradient(p_st_mfa, c_mfa);
             extrema_idx = find(diff(sign(dpdc)));
 
             if numel(extrema_idx) >= 2
-                % przypadek z histerez¹
+                % przypadek z histerezÂ¹
                 i1 = extrema_idx(1);
                 i2 = extrema_idx(end);
 
-                % ga³¹Ÿ dolna stabilna
+                % gaÂ³Â¹Å¸ dolna stabilna
                 LH(qi) = plot(ax, p_st_mfa(1:i1), c_mfa(1:i1), '-', ...
                               'Color', colors(qi, :), 'LineWidth', 2);
-                % ga³¹Ÿ niestabilna
+                % gaÂ³Â¹Å¸ niestabilna
                 plot(ax, p_st_mfa(i1:i2), c_mfa(i1:i2), '--', ...
                      'Color', colors(qi, :), 'LineWidth', 2);
-                % ga³¹Ÿ górna stabilna
+                % gaÂ³Â¹Å¸ gÃ³rna stabilna
                 plot(ax, p_st_mfa(i2:end), c_mfa(i2:end), '-', ...
                      'Color', colors(qi, :), 'LineWidth', 2);
 
@@ -215,7 +215,7 @@ for j = 1:2
     legend(ax, LH, leg, 'Interpreter', 'latex', 'FontSize', 18, 'Location', legend_pos{j});
 end
 
-% PANEL 3: PA i MFA dla ró¿nych k
+% PANEL 3: PA i MFA dla rÃ³Â¿nych k
 ax3 = axes('Position', [left_margins(3), 0.055, width, height]);
 hold(ax3, 'on');
 box(ax3, 'on');
@@ -394,7 +394,7 @@ axis square
 h = legend(LH, leg);
 set(h, 'Interpreter', 'latex', 'Location', 'southeast', 'FontSize', 20)
 
-% ZAPIS DO PDF (odkomentuj jeœli chcesz zapisaæ)
+% ZAPIS DO PDF (odkomentuj jeÅ“li chcesz zapisaÃ¦)
 set(gcf, 'PaperPositionMode', 'auto');
 set(gcf, 'InvertHardcopy', 'off');
 set(fig, 'Units', 'inches');
