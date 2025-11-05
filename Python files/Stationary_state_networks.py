@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent
 NETWORKS = [
     {'name': 'S1', 'folder': BASE_DIR / '2024-11-20 14-34 S1', 'N': 320,  'k': 14.81, 'q_eff': 3.809375},
     {'name': 'M1', 'folder': BASE_DIR / '2024-11-20 17-29 M1', 'N': 1429, 'k': 8.8,   'q_eff': 3.966410},
-    {'name': 'L1', 'folder': BASE_DIR / '2025-03-17 15-39 L1 T4000', 'N': 5793, 'k': 27.09, 'q_eff': 2.611255},
+    {'name': 'L1', 'folder': BASE_DIR / '2024-11-21 00-53 L1', 'N': 5793, 'k': 27.09, 'q_eff': 2.611255},
     {'name': 'S2', 'folder': BASE_DIR / '2024-11-20 16-30 S2', 'N': 165,  'k': 45.22, 'q_eff': 3.339394},
     {'name': 'M2', 'folder': BASE_DIR / '2024-11-21 19-22 M2', 'N': 3862, 'k': 10.62, 'q_eff': 4.0},
     {'name': 'L2', 'folder': BASE_DIR / '2024-11-23 21-39 L2', 'N': 5524, 'k': 34.11, 'q_eff': 3.999638},
@@ -244,3 +244,4 @@ def plot_all(networks, q, p_eng, p_ind):
 if __name__ == "__main__":
     # change P_ENG here or add argparse if you want CLI
     plot_all(NETWORKS, Q, P_ENG, P_IND)
+
