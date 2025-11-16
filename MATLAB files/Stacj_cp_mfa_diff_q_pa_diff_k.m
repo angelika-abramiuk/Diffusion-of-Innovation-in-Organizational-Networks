@@ -287,7 +287,7 @@ for ki = 1:length(k)
         LH(length(k) + 1) = plot(p_st_mfa_down, c_mfa_down, '-', 'Color', 'k', 'LineWidth', 2);
         hold on
 
-    elseif f > 0.5
+    elseif p_eng > 0.5
         % MFA
         c_mfa_up = [0.5001:0.001:0.9999];
         p_st_mfa_up = (c_mfa_up.*(1 - c_mfa_up).^q - (1 - c_mfa_up).*c_mfa_up.^q)./(c_mfa_up.*(1 - c_mfa_up).^q - (1 - c_mfa_up).*c_mfa_up.^q + p_eng - c_mfa_up);
@@ -403,3 +403,4 @@ set(fig, 'PaperUnits', 'inches', ...
           'PaperSize', [pos(3) pos(4)], ...
           'PaperPosition', [0 0 pos(3) pos(4)]);
 % print(fig, 'MFA_PA_three_panel_fixed.pdf', '-dpdf', '-r300');
+
